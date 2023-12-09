@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ShoppingZone.Models.tbl_Products>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search Results</h2>
+
+<div class="product-container" style="background-color:darkslategrey">
+    @foreach(var item in Model)
+    {
+        <div class="product-item">
+            <div class="row-cols-1">
+                <a href="@Url.Action("AddtoCart","Users", new {id = item.ProdId})">
+                    <img class="img-fluid" src="~/Uploads/@item.Image"/>
+                </a>
+                <h3>@item.ProdName</h3>
+                <p>Rs. <strong>@item.Price</strong></p>
+            </div>
+        </div>
+    }
+</div>
+<style>
+    .product-container{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .product-item{
+        width: 350px;
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        text-align: center;
+        color: burlywood
+    }
+
+
+
+    .product-item img{
+        max-width: 50%;
+        height: 200px;
+    }
+</style>
+<h3 style="color:red">@TempData["searchresult"]</h3>
+<script>
+    function searching() {
+        var search = document.getElementById('search').value;
+        if (!search) {
+            alert('search products');
+            return false;
+        }
+    }
+</script>
+

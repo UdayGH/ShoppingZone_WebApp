@@ -1,0 +1,39 @@
+﻿@model ShoppingZone.Models.tbl_Products
+
+@{
+    ViewBag.Title = "AddtoCart";
+}
+
+<h3><u>@Model.ProdName - @Model.ProdId</u></h3>
+
+<div class="container" style="background-color:darkslategray">
+    <form action="/Users/AddtoCart" method="post" onsubmit="return validateForm()">
+        <div class="row">
+            <div class="row-cols-1" style="color:burlywood">
+                <input type="hidden" name="id" value="@Model.ProdId"/>
+
+                <img src="~/Uploads/@Model.Image" style="border:2px solid #000000" />
+                <h3>@Model.ProdName</h3>
+                <p>@Model.ProdDesc</p>
+                <p>Rs. <strong>@Model.Price</strong></p>
+                <input type="number" id="qty" placeholder="qty" min="1" max="10" name="qty" style="width:5%" />
+                <input type="submit" value="Add to cart" class="btn btn-warning" style="width:20%" onclick="validateForm()" />
+            </div>
+        </div>
+    </form>
+</div>
+<style>
+    .row img{
+        max-width: 20%;
+        height: 250px;
+    }
+</style>
+<script>
+    function validateForm() {
+        var qty = document.getElementById('qty').value;
+        if (!qty) {
+            alert('please choose product quantity');
+            return false;
+        }
+    }
+</script>

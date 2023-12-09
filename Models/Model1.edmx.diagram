@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="455e124539af4a64a0b5635f0801bfcb" Name="Diagram1">
+        <EntityTypeShape EntityType="ShoppingZoneModel.tbl_Categories" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingZoneModel.tbl_Invoice" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingZoneModel.tbl_order" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingZoneModel.tbl_Products" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingZoneModel.tbl_UserRegister" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="ShoppingZoneModel.FK__tbl_Produ__CatId__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingZoneModel.FK__tbl_Invoi__UserI__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingZoneModel.FK__tbl_order__Invoi__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingZoneModel.FK__tbl_order__ProdI__4CA06362" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

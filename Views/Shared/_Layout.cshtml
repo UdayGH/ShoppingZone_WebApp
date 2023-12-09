@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+
+        <div class="container" style="background-color:darkslategray">
+            @Html.ActionLink("ShoppingZone", "Index", "Users", new { area = "" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Products", "Index", "Users", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Cart", "Checkout", "Users", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Signin", "Login", "Accounts", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Signup", "Register", "Accounts", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li style="position:absolute;top:16px; right:50px;">
+                            @using (Html.BeginForm("search", "Users", FormMethod.Get))
+                            {
+                                @Html.TextBox("Search")
+                                <input type="submit" value="search" onclick="searching()" />
+                            }
+                        </li>
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+
+                        <li>@Html.ActionLink("Products", "Index", "Users", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Orders", "Orders", "Users", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Cart", "Checkout", "Users", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li><a href="@Url.Action("Signout","Accounts")" id="logoutLink">Signout</a></li>
+                        <li style="position: absolute; top: 16px; right: 50px;">
+                            @using (Html.BeginForm("search", "Users", FormMethod.Get))
+                            {
+                                @Html.TextBox("Search")
+                                <input type="submit" value="search" onclick="searching()" />
+                            }
+                        </li>
+                    }@if (User.Identity.IsAuthenticated)
+                    {
+                        if (Session["AdminId"] != null)
+                        {
+                            <li>@Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("AddProduct", "Create", "Products", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("AddCategory", "Create", "Categories", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li><a href="@Url.Action("Signout","Accounts")" id="logoutLink">Signout</a></li>
+                        }
+                    }
+                </ul>
+                
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<script>
+    var logoutLink = document.getElementById('logoutLink');
+
+    logoutLink.onclick = function () {
+        var confirmed = confirm("Are you sure you want to logout");
+        if (!confirmed) {
+            return false;
+        }
+        logout();
+    };
+    function logout() {
+        var controller = "@Url.Action("Signout","Accounts")";
+        var url = controller
+        windows.location.href = url;
+    }
+</script>
+
+
+
+
+
+

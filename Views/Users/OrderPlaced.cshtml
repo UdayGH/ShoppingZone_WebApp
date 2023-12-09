@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ShoppingZone.Models.tbl_order>
+@{
+    ViewBag.Title = "OrderPlaced";
+}
+
+<h3 style="color:green">Order placed Successfully!</h3><br /><br />
+<h3 style="color:black">Your Orders :</h3>
+<hr />
+<div class="product-container" style="background-color:darkslategray">
+    @foreach(var item in Model)
+    {
+        int userid = Convert.ToInt32(Session["Userid"]);
+        if(userid == item.tbl_Invoice.UserId)
+        {
+            <div class="product-item">
+                <div class="row-cols-1">
+                    <img class="img-fluid" src="~/Uploads/@item.tbl_Products.Image" />
+                    <h5>OrderId: @item.OrderId</h5>
+                    <h5>Product Id: @item.ProdID</h5>
+                    <h5>Quantity: @item.Qty</h5>
+                    <h5>InvoiceId: @item.InvoiceId</h5>
+                    <h5>UserId: @item.tbl_Invoice.UserId</h5>
+                    <h5>Mobile no: @item.Contact</h5>
+                    <h5>Delivery Address: @item.Address</h5>
+
+                    <p>Amount Paid: <strong>@item.Price</strong></p>
+                </div>
+            </div>
+        }
+    }
+</div>
+<style>
+    .product-container{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .product-item{
+        width: 350px;
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        text-align: center;
+        color: burlywood;
+    }
+
+    .product-item img{
+        max-width:50%;
+        height: 200px;
+    }
+</style>
+

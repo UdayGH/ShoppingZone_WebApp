@@ -1,0 +1,82 @@
+﻿@model IEnumerable<ShoppingZone.Models.Cart>
+
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<h3><u>Cart</u></h3>
+
+<div class="container" style="background-color:darkslategray">
+    <div class="row">
+        <div class="cart-list">
+            <table class="table">
+                <thead class="thread-primary">
+                    <tr class="text-center" style="color:burlywood">
+                        <th>ID</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Session["cart"] == null)
+                    {
+                        <tr class="text alert-danger">
+                            <td class="Empty" style="color:red"><h3>Cart is Empty</h3></td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach(var item in Session["cart"] as List<ShoppingZone.Models.Cart>)
+                {
+                <tr class="text-center" style="color:white">
+                    <td class="product-id">
+                        @item.proId
+                    </td>
+                    <td class="product-name">
+                        @item.proname
+                    </td>
+                    <td class="price">
+                        @item.price
+                    </td>
+
+                    <td class="total">Rs.@item.bill</td>
+                    <td class="product-remove"><a href="@Url.Action("remove","Users",new { id = item.proId })">remove</a></td>
+                </tr>
+                }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="cart-total mb-3">
+    <p>
+        <span>Total</span>
+        <span><strong>Rs:@Session["total"]</strong></span>
+    </p>
+
+</div>
+
+@if (!User.Identity.IsAuthenticated)
+            {
+                <b>Login to place order</b>
+                <br/>
+                
+                <a href="@Url.Action("Login","Accounts")" class="btn btn-primary">Signin</a>
+                <br />
+                <h8>Don't have an account?</h8>
+                <a href="@Url.Action("Register", "Accounts")">Signup</a>
+            }
+@if (User.Identity.IsAuthenticated)
+            {
+    using (Html.BeginForm())
+                {
+                    <span>Contact:</span>
+                    <input type="text" name="contact" class="form-control col-lg-6"/>
+                    <span>Address:</span><textarea name="address" class="form-control col-lg-6"></textarea>
+                    <input type="submit" value="Checkout" class="btn btn-primary"/>
+                }
+            }

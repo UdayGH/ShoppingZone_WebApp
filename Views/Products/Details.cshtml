@@ -1,0 +1,58 @@
+﻿@model ShoppingZone.Models.tbl_Products
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 style="color:firebrick">Product Details</h2>
+
+<div>
+  
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProdName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProdName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProdDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProdDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_Categories.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_Categories.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProdId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
